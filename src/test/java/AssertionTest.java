@@ -21,9 +21,11 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 
 import org.hamcrest.core.CombinableMatcher;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class AssertionTest {
+//	@Ignore("Test how to ignore the test")
 	@Test
 	  public void testAssertArrayEquals() {
 	    byte[] expected = "trial".getBytes();
@@ -69,7 +71,7 @@ public class AssertionTest {
 	  // JUnit Matchers assertThat
 	  @Test
 	  public void testAssertThatBothContainsString() {
-	    assertThat("albumen", both(containsString("al")).and(containsString("bu")));
+	    assertThat("albumen", both(containsString("al")).and(containsString("bume")));
 	  }
 
 	  @Test
@@ -85,7 +87,7 @@ public class AssertionTest {
 	  // Core Hamcrest Matchers with assertThat
 	  @Test
 	  public void testAssertThatHamcrestCoreMatchers() {
-	    assertThat("good", allOf(equalTo("good"), startsWith("good")));
+	    assertThat("good", allOf(equalTo("good"), startsWith("go")));
 	    assertThat("good", not(allOf(equalTo("bad"), equalTo("good"))));
 	    assertThat("good", anyOf(equalTo("bad"), equalTo("good")));
 	    assertThat(7, not(CombinableMatcher.<Integer> either(equalTo(3)).or(equalTo(4))));
@@ -96,4 +98,6 @@ public class AssertionTest {
 	  public void testAssertTrue() {
 	    assertTrue("failure - should be true", true);
 	  }
+	  
+	  
 }
