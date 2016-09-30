@@ -1,4 +1,4 @@
-package com.sap.test.runners;
+package com.sap.test.parameterized;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
@@ -28,20 +28,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 		@Test
 		public void test() {
-			assertEquals(fExpected, Fibonacci0.compute(fInput));
+			assertEquals(fExpected, Fibonacci.compute(fInput));
 		}
 	}
 
- class Fibonacci0 {
-	public static int compute(int n) {
-		int result = 0;
-
-		if (n <= 1) {
-			result = n;
-		} else {
-			result = compute(n - 1) + compute(n - 2);
-		}
-
-		return result;
-	}
-}
