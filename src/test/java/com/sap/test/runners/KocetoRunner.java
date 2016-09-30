@@ -1,6 +1,9 @@
+package com.sap.test.runners;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
+
+import com.sap.test.assertions.AssertionTest;
 
 
 

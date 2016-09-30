@@ -1,3 +1,4 @@
+package com.sap.test.runners;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 	@RunWith(Parameterized.class)
-	public class ParameterizedFibonacciTest {
+	public class FibonacciParameterizedTest {
 
 		@Parameters
 		public static Collection<Object[]> data() {
@@ -20,18 +21,18 @@ import org.junit.runners.Parameterized.Parameters;
 
 		private int fExpected;
 
-		public ParameterizedFibonacciTest(int input, int expected) {
+		public FibonacciParameterizedTest(int input, int expected) {
 			fInput = input;
 			fExpected = expected;
 		}
 
 		@Test
 		public void test() {
-			assertEquals(fExpected, Fibonacci.compute(fInput));
+			assertEquals(fExpected, Fibonacci0.compute(fInput));
 		}
 	}
 
- class Fibonacci {
+ class Fibonacci0 {
 	public static int compute(int n) {
 		int result = 0;
 

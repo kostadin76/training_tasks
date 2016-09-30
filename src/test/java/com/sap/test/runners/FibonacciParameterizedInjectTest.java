@@ -1,4 +1,4 @@
-package unit.test.parameterized;
+package com.sap.test.runners;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class FibonacciParameterTest {
+public class FibonacciParameterizedInjectTest {
 
 			@Parameters(name = "{index}: Fibonacci.compute({1})")
 			public static Collection<Object[]> data() {

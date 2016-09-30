@@ -1,39 +1,31 @@
-import java.util.ArrayList;
-import java.util.List;
+package com.sap.test.exceptions;
+
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import static org.hamcrest.CoreMatchers.startsWith;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.notNullValue;
 
-public class ExceptionTest {
 
+public class ExpectedExceptionRuleMatcherTest {
+	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-
-	@Test
-	public void shouldTestExceptionMessage() {
-		List<Object> list = new ArrayList<Object>();
-
-		thrown.expect(IndexOutOfBoundsException.class);
-		thrown.expectMessage("Index: 0, Size: 0");
-		list.get(0); // execution will never get past this line
-	}
-
+	
 	@Test
 	public void shouldThrow() {
 		TestThing testThing = new TestThing();
 		thrown.expect(NotFoundException.class);
 		thrown.expectMessage(startsWith("some Message"));
 		thrown.expect(hasProperty("response", hasProperty("status", is(404))));
-		thrown.expect(hasProperty("cause", notNullValue()));
+		thrown.expect(hasProperty("cause", nullValue()));
 		try {
 			testThing.chuck();
 		} catch (NotFoundException exc) {
