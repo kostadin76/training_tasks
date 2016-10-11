@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class UnitTestAnagramApp {
+public class TestAnagramApp {
 	@Test
 	public void testAnagramRotationLowerBoundary(){
 		AnagramBuilder ab = new AnagramBuilder("Jako");
