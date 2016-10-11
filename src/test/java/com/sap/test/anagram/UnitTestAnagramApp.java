@@ -1,54 +1,53 @@
 package com.sap.test.anagram;
 
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
-import com.sap.test.anagram.AnagramBuilder;
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.Test;
 
 public class UnitTestAnagramApp {
 	@Test
 	public void testAnagramRotationLowerBoundary(){
 		AnagramBuilder ab = new AnagramBuilder("Jako");
 		ab.rotate(2);
-		assertArrayEquals("Jaok".toCharArray(), ab.getCurrentAnagram());
+		assertTrue(ab.currentAnagramEqualsTo("Jaok"));
 	}
 	
 	@Test
 	public void testAnagramRotationUpperBoundary(){
 		AnagramBuilder ab = new AnagramBuilder("Jako");
 		ab.rotate(4);
-		assertArrayEquals("akoJ".toCharArray(), ab.getCurrentAnagram());
+		assertTrue(ab.currentAnagramEqualsTo("akoJ"));
 	}
 
 	@Test
 	public void testAnagramRotation(){
 		AnagramBuilder ab = new AnagramBuilder("Jako");
 		ab.rotate(3);
-		assertArrayEquals("Jkoa".toCharArray(), ab.getCurrentAnagram());
+		assertTrue(ab.currentAnagramEqualsTo("Jkoa"));
 	}
 	
 	@Test
 	public void testOneLetterWordRotation(){
 		AnagramBuilder ab = new AnagramBuilder("J");
 		ab.rotate(1);
-		assertArrayEquals("J".toCharArray(), ab.getCurrentAnagram());
+		assertTrue(ab.currentAnagramEqualsTo("J"));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullWordRotation(){
-		AnagramBuilder ab = new AnagramBuilder(null);
+		new AnagramBuilder(null);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyWordRotation(){
-		AnagramBuilder ab = new AnagramBuilder("");
+		new AnagramBuilder("");
 	}
 	
 	@Test
 	public void testDoAnagram(){
 		AnagramBuilder ab = new AnagramBuilder("Jako");
 		ab.doAnagram(4);
-		assertArrayEquals("okaJ".toCharArray(), ab.getAnagramedCharArray());
+		assertTrue(ab.anagramEqualsTo("okaJ"));
 	}
 	
 }

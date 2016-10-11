@@ -59,11 +59,11 @@ public class AnagramBuilder {
 		System.out.println();
 	}
 	
-	public char[] getCurrentAnagram(){
-		return charArray;
+	public boolean currentAnagramEqualsTo(String anagramToCompare){
+		return Arrays.equals(charArray, anagramToCompare.toCharArray());
 	}
 	
-	public char[] getAnagramedCharArray(){
-		return anagramedCharArray;
+	public boolean anagramEqualsTo(String anagramToCompare){
+		return Arrays.equals(anagramedCharArray, anagramToCompare.toCharArray());
 	}
 }
