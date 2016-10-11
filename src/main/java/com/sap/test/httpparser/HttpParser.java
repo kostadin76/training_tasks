@@ -6,10 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class HttpParser {
@@ -17,20 +20,20 @@ public class HttpParser {
 
   private BufferedReader httpRequestReader;
   private String method, url;
-  private Hashtable<String, String> headers, params;
+  private Map<String, String> headers, params;
   private int[] ver;
   private String[] cmd;
 
   public HttpParser(InputStream is) {
-    httpRequestReader = new BufferedReader(new InputStreamReader(is));
+    httpRequestReader = new BufferedReader(new InputStreamReader(is, Charset.defaultCharset()));
     initHttpReader();
   }
   
 	private void initHttpReader() {
 		method = "";
 		url = "";
-		headers = new Hashtable<String, String>();
-		params = new Hashtable<String, String>();
+		headers = new HashMap<String, String>();
+		params = new HashMap<String, String>();
 		ver = new int[2];
 	}
 
@@ -80,8 +83,8 @@ public class HttpParser {
     }
   }
 
-  public Hashtable<String, String> getHeaders() {
-    return headers;
+  public Map<String, String> getHeaders() {
+    return deepCopyMap(headers);
   }
 
   public String getRequestURL() {
@@ -92,8 +95,8 @@ public class HttpParser {
     return params.get(key);
   }
 
-  public Hashtable<String, String> getParams() {
-    return params;
+  public Map<String, String> getParams() {
+    return deepCopyMap(params);
   }
 
   public String getVersion() {
@@ -224,6 +227,14 @@ public class HttpParser {
       }
       line = httpRequestReader.readLine();
     }
+  }
+  
+  private Map<String, String> deepCopyMap(Map<String, String> original){
+      Map<String, String> copy = new HashMap<String, String>(original.size());
+      for(Map.Entry<String, String> entry : original.entrySet()) {
+          copy.put(entry.getKey(), entry.getValue());
+      }
+      return copy;
   }
 
 	private boolean missing_Host_Header() {
