@@ -175,4 +175,41 @@ public class HttpParserUnitTest {
 		httpRequest.parseRequest();
 		assertEquals(httpRequest.getMethod(), "GET");
 	}
+	
+	@Test
+	public void testGetRequestURL() throws IOException{
+		httpRequestAsString = "GET /test HTTP/1.1\r\n"	+
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertEquals(httpRequest.getRequestURL(), "/test");
+	}
+	
+	@Test
+	public void testGetRequestURLWithParameters() throws IOException{
+		httpRequestAsString = "GET /test?param1=value1 HTTP/1.1\r\n"	+
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertEquals(httpRequest.getRequestURL(), "/test");
+	}
+	
+	@Test
+	public void testGetVersion() throws IOException{
+		httpRequestAsString = "GET /test?param1=value1 HTTP/1.1\r\n"	+
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertEquals(httpRequest.getVersion(), "1.1");
+	}
+	
+	@Test
+	public void testBadHeader() throws IOException{
+		httpRequestAsString = "GET / HTTP/1.1\r\n"	+
+				"Host: localhost:50000\r\n" +
+				"badheader bad";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertThat(httpRequest.getHeaders().size(), is(0));		
+	}
 }
