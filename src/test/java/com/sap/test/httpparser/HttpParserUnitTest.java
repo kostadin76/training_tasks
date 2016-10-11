@@ -90,6 +90,16 @@ public class HttpParserUnitTest {
 		assertEquals(httpRequest.getParam("param1"), "value1");
 		assertEquals(httpRequest.getParam("param2"), "value2");
 	}
+	
+	@Test
+	public void testRequestParameterWithEmptyValue() throws IOException{
+		httpRequestAsString = "GET /?param1= HTTP/1.1\r\n" +
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertTrue(httpRequest.getParams().size() == 1);
+		assertEquals(httpRequest.getParam("param1"), "");
+	}
 
 	@Test
 	public void testRequestHeaders() throws IOException{
