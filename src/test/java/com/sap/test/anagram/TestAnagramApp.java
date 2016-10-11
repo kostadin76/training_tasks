@@ -2,6 +2,8 @@ package com.sap.test.anagram;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 public class TestAnagramApp {
@@ -48,6 +50,11 @@ public class TestAnagramApp {
 		AnagramBuilder ab = new AnagramBuilder("Jako");
 		ab.doAnagram(4);
 		assertTrue(ab.anagramEqualsTo("okaJ"));
+	}
+	
+	@Test
+	public void testMain() throws IOException{
+		AnagramApp.main(null);
 	}
 	
 }
