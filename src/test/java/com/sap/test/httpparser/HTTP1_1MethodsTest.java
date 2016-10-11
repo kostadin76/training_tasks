@@ -1,4 +1,4 @@
-package com.sap.test.httprequest;
+package com.sap.test.httpparser;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
