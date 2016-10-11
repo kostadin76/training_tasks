@@ -10,6 +10,7 @@ import org.junit.rules.Timeout;
 
 public class TimeoutTest {
 	
+	@Ignore
 	@Test(timeout=1000)
 	public void testTimeout(){
 		try{
