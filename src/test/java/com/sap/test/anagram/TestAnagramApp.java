@@ -57,4 +57,9 @@ public class TestAnagramApp {
 		AnagramApp.main(null);
 	}
 	
+	@Test
+	public void testConstructor() throws IOException{
+		new AnagramApp();
+	}
+	
 }
