@@ -16,7 +16,7 @@ public class HttpParserUnitTest {
 	
 	private String httpRequestAsString;
 	private HttpParser httpRequest;
-/*	
+	
 	@Test
 	public void testEmptyStatusLine() throws IOException{
 		httpRequestAsString = "";
@@ -158,7 +158,7 @@ public class HttpParserUnitTest {
 	public void testDateHeader() throws IOException {
 		assertThat(HttpParser.getDateHeader(), allOf(containsString("Date:"), containsString("GMT")));
 	}
-	*/
+
 	@Test
 	public void testNoRequestHeaders() throws IOException{
 		httpRequestAsString = "GET / HTTP/1.0\r\n";
