@@ -152,7 +152,7 @@ public class HttpParser {
 		  extractRequestParameters(idx);
 		}
 		parseHeaders();
-		if (headers == null){
+		if (is_HTTP_1_1_Request() && headers == null){
 			return Status.BAD_REQUEST;
 		}
 		return Status.OK;
