@@ -76,11 +76,7 @@ public class HttpParser {
   }
 
   public String getHeader(String key) {
-    if (headers != null){
-    	return headers.get(key.toLowerCase());
-    } else{
-    	return null;
-    }
+   	return headers.get(key.toLowerCase());
   }
 
   public Map<String, String> getHeaders() {
@@ -129,18 +125,15 @@ public class HttpParser {
         break;
       }
     }
-
     return ret;
   }
 
   public static String getDateHeader() {
     SimpleDateFormat format;
     String ret;
-
     format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", Locale.US);
     format.setTimeZone(TimeZone.getTimeZone("GMT"));
     ret = "Date: " + format.format(new Date()) + " GMT";
-
     return ret;
   }
 
@@ -152,7 +145,7 @@ public class HttpParser {
 		  extractRequestParameters(idx);
 		}
 		parseHeaders();
-		if (is_HTTP_1_1_Request() && headers == null){
+		if (is_HTTP_1_1_Request() && headers.size() == 0){
 			return Status.BAD_REQUEST;
 		}
 		return Status.OK;
@@ -225,7 +218,7 @@ public class HttpParser {
     while (!"".equals(line) && line != null) {
       idx = line.indexOf(':');
       if (idx < 0) {
-        headers = null;
+        headers.clear();
         break;
       }
       else {
