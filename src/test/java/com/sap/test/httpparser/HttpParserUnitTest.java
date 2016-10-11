@@ -166,4 +166,13 @@ public class HttpParserUnitTest {
 		httpRequest.parseRequest();
 		assertEquals(httpRequest.getHeader("Cookies"), null);
 	}
+	
+	@Test
+	public void testGetMethod() throws IOException{
+		httpRequestAsString = "GET / HTTP/1.1\r\n"	+
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertEquals(httpRequest.getMethod(), "GET");
+	}
 }
