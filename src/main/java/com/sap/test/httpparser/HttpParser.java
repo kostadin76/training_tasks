@@ -174,7 +174,7 @@ public class HttpParser {
 		    params.put(URLDecoder.decode(temp[0], "ISO-8859-1"), URLDecoder.decode(temp[1], "ISO-8859-1"));
 		  }
 		  else if(temp.length == 1 && prms[i].indexOf('=') == prms[i].length()-1) {
-		    // handle empty string separatedly
+		    // handle empty string separately
 		    params.put(URLDecoder.decode(temp[0], "ISO-8859-1"), "");
 		  }
 		}
