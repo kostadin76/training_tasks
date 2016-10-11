@@ -117,9 +117,9 @@ public class HttpParser {
 
     ret = null;
     key = "" + codevalue;
-    for (i=0; i<Status.HttpReplies.length; i++) {
-      if (Status.HttpReplies[i][0].equals(key)) {
-        ret = codevalue + " " + Status.HttpReplies[i][1];
+    for (i=0; i<StatusCodes.HttpReplies.length; i++) {
+      if (StatusCodes.HttpReplies[i][0].equals(key)) {
+        ret = codevalue + " " + StatusCodes.HttpReplies[i][1];
         break;
       }
     }
