@@ -132,12 +132,19 @@ public class HttpParserUnitTest {
 	}
 	
 	@Test
-	public void testBadMethodName() throws IOException{
-		httpRequestAsString = "GUEST / HTTP/1.1\r\n";
+	public void testBadMethodNameProtocol10() throws IOException{
+		httpRequestAsString = "GUEST / HTTP/1.0\r\n";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
 		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
 	}
 	
+	@Test
+	public void testBadMethodNameProtocol11() throws IOException{
+		httpRequestAsString = "GUEST / HTTP/1.1\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
+	}
+
 	@Test
 	public void testCompareVersion() throws IOException{
 		httpRequestAsString = "GET / HTTP/1.1\r\n"	+
