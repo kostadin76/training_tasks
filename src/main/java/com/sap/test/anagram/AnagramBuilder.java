@@ -1,15 +1,19 @@
 package com.sap.test.anagram;
 
+import java.util.Arrays;
+
 public class AnagramBuilder {
 
-	static int size;
-
-	static int count;
-
-	static char[] charArray;
+	private int size;
+	private int count;
+	private char[] charArray;
+	private char[] anagramedCharArray;
 
 	public AnagramBuilder(String anagram) {
 		// String input = "Java Source and Support";
+		if(anagram == null || anagram.isEmpty()){
+			throw new IllegalArgumentException();
+		}
 		size = anagram.length();
 		count = 0;
 		charArray = new char[size];
@@ -27,6 +31,7 @@ public class AnagramBuilder {
 			doAnagram(newSize - 1); // anagram remaining
 			if (newSize == 2) { // if innermost,
 				display();
+				anagramedCharArray = Arrays.copyOf(charArray, charArray.length);
 			}
 			rotate(newSize); // rotate word
 		}
@@ -56,5 +61,9 @@ public class AnagramBuilder {
 	
 	public char[] getCurrentAnagram(){
 		return charArray;
+	}
+	
+	public char[] getAnagramedCharArray(){
+		return anagramedCharArray;
 	}
 }
