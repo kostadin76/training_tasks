@@ -104,11 +104,17 @@ public class HttpParser {
   }
 
   public int compareVersion(int major, int minor) {
-    if (major < ver[0]) return -1;
-    else if (major > ver[0]) return 1;
-    else if (minor < ver[1]) return -1;
-    else if (minor > ver[1]) return 1;
-    else return 0;
+    if (major < ver[0]){
+    	return -1;
+    } else if (major > ver[0]){
+    	return 1;
+    } else if (minor < ver[1]){
+    	return -1;
+    } else if (minor > ver[1]){
+    	return 1;
+    } else{
+    	return 0;
+    }
   }
 
   public static String getHttpReply(int codevalue) {

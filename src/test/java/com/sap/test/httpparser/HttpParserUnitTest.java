@@ -13,7 +13,7 @@ import org.junit.Test;
 import com.sap.test.httpparser.HttpParser;
 import com.sap.test.httpparser.Status;
 
-public class HttpRequestJUnitTest {
+public class HttpParserUnitTest {
 	
 	private String httpRequestAsString;
 	private HttpParser httpRequest;
@@ -118,5 +118,18 @@ public class HttpRequestJUnitTest {
 		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
 	}
 	
-
+	@Test
+	public void testCompareVersion() throws IOException{
+		httpRequestAsString = "GET / HTTP/1.1\r\n"	+
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertThat(httpRequest.compareVersion(0, 0), is(-1));
+		assertThat(httpRequest.compareVersion(0, 1), is(-1));
+		assertThat(httpRequest.compareVersion(0, 2), is(-1));
+		assertThat(httpRequest.compareVersion(2, 0), is(1));
+		assertThat(httpRequest.compareVersion(2, 1), is(1));
+		assertThat(httpRequest.compareVersion(1, 2), is(1));
+		assertThat(httpRequest.compareVersion(1, 1), is(0));
+	}
 }
