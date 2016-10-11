@@ -127,6 +127,7 @@ public class HttpParserUnitTest {
 		assertThat(httpRequest.compareVersion(0, 0), is(-1));
 		assertThat(httpRequest.compareVersion(0, 1), is(-1));
 		assertThat(httpRequest.compareVersion(0, 2), is(-1));
+		assertThat(httpRequest.compareVersion(1, 0), is(-1));
 		assertThat(httpRequest.compareVersion(2, 0), is(1));
 		assertThat(httpRequest.compareVersion(2, 1), is(1));
 		assertThat(httpRequest.compareVersion(1, 2), is(1));
