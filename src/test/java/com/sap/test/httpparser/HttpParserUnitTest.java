@@ -69,6 +69,13 @@ public class HttpParserUnitTest {
 	}
 	
 	@Test
+	public void testHTTPProtocolNumberGreaterThan0_1() throws IOException{
+		httpRequestAsString = "OPTION / HTTP/0.1\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
+	}
+	
+	@Test
 	public void testRequestWithoutHeaders() throws IOException{
 		httpRequestAsString = "GET / HTTP/1.1\r\n";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
