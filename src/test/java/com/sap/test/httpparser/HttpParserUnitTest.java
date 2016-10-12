@@ -76,6 +76,13 @@ public class HttpParserUnitTest {
 	}
 	
 	@Test
+	public void testBadFormattedHTTPProtocol() throws IOException{
+		httpRequestAsString = "GET / HTTP/.1\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
+	}
+	
+	@Test
 	public void testRequestWithoutHeaders() throws IOException{
 		httpRequestAsString = "GET / HTTP/1.1\r\n";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
