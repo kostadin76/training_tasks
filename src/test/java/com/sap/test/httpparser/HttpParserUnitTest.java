@@ -214,6 +214,15 @@ public class HttpParserUnitTest {
 	}
 	
 	@Test
+	public void testHeadMethod() throws IOException{
+		httpRequestAsString = "HEAD / HTTP/1.1\r\n"	+
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertEquals(httpRequest.getMethod(), "HEAD");
+	}
+	
+	@Test
 	public void testGetRequestURL() throws IOException{
 		httpRequestAsString = "GET /test HTTP/1.1\r\n"	+
 				"Host: localhost:50000\r\n";
