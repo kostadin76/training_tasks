@@ -110,6 +110,15 @@ public class HttpParserUnitTest {
 	}
 
 	@Test
+	public void testNullRequestHeaders() throws IOException{
+		httpRequestAsString = "GET / HTTP/1.0\r\n" +
+				"\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertTrue(httpRequest.getHeaders().size() == 0);
+	}
+	
+	@Test
 	public void testRequestHeaders() throws IOException{
 		httpRequestAsString = "GET / HTTP/1.1\r\n" +
 				"Host: localhost:50000\r\n" +
@@ -120,7 +129,7 @@ public class HttpParserUnitTest {
 		assertEquals(httpRequest.getHeader("Cookie"), "JSESSIONID=123456");
 		assertEquals(httpRequest.getHeader("Host"), "localhost:50000");
 	}
-	
+
 	@Test
 	public void testNonExistingRequestHeader() throws IOException{
 		httpRequestAsString = "GET / HTTP/1.1\r\n" +
