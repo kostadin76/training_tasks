@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -296,5 +297,10 @@ public class HttpParserUnitTest {
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
 		httpRequest.parseRequest();
 		assertThat(httpRequest.getHeaders().size(), is(0));		
+	}
+	
+	@Test
+	public void testHttpReplyOneLoop() throws IOException{
+			assertNull(HttpParser.getHttpReply(600));
 	}
 }

@@ -241,7 +241,7 @@ public class HttpParser {
 	}
 
 	private boolean is_HTTP_1_1_Request() {
-		return (ver[0] == 1) && (ver[1] >= 1);
+		return ver[0] == 1 && ver[1] >= 1;
 	}
 
 	private boolean is_POST_Request() {
