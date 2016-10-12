@@ -20,7 +20,7 @@ public class HttpParserUnitTest {
 	
 	@Test
 	public void testEmptyStatusLine() throws IOException{
-		httpRequestAsString = "";
+		httpRequestAsString = "\r\n";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
 		assertThat(httpRequest.parseRequest(), is(0));
 	}
@@ -29,7 +29,6 @@ public class HttpParserUnitTest {
 	public void testNullStatusLine() throws IOException{
 		httpRequestAsString = "";
 		InputStream is = new ByteArrayInputStream(httpRequestAsString.getBytes());
-		while(is.read() != -1);
 		httpRequest = new HttpParser(is);
 		assertThat(httpRequest.parseRequest(), is(0));
 	}
