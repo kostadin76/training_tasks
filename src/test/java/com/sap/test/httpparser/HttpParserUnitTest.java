@@ -107,16 +107,6 @@ public class HttpParserUnitTest {
 	}
 	
 	@Test
-	public void testOneRequestParameters() throws IOException{
-		httpRequestAsString = "GET /?param1=value1 HTTP/1.1\r\n" +
-				"Host: localhost:50000\r\n";
-		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
-		httpRequest.parseRequest();
-		assertTrue(httpRequest.getParams().size() == 1);
-		assertEquals(httpRequest.getParam("param1"), "value1");
-	}
-	
-	@Test
 	public void testTwoRequestParameters() throws IOException{
 		httpRequestAsString = "GET /?param1=value1&param2=value2 HTTP/1.1\r\n" +
 				"Host: localhost:50000\r\n";
@@ -255,6 +245,39 @@ public class HttpParserUnitTest {
 		httpRequest.parseRequest();
 		assertEquals(httpRequest.getRequestURL(), "/test");
 	}
+	
+	@Test
+	public void testOneRequestParameters() throws IOException{
+		httpRequestAsString = "GET /?param1=value1 HTTP/1.1\r\n" +
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertTrue(httpRequest.getParams().size() == 1);
+		assertEquals(httpRequest.getParam("param1"), "value1");
+	}
+	
+	@Test
+	public void testEmptyRequestParameter() throws IOException{
+		httpRequestAsString = "GET /?param1=&param2=value2 HTTP/1.1\r\n" +
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertTrue(httpRequest.getParams().size() == 2);
+		assertEquals(httpRequest.getParam("param2"), "value2");
+		assertEquals(httpRequest.getParam("param1"), "");
+	}
+	
+	@Test
+	public void testBadRequestParameter() throws IOException{
+		httpRequestAsString = "GET /?param1=value1&=&param2=value2 HTTP/1.1\r\n" +
+				"Host: localhost:50000\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		httpRequest.parseRequest();
+		assertTrue(httpRequest.getParams().size() == 2);
+		assertEquals(httpRequest.getParam("param2"), "value2");
+		assertEquals(httpRequest.getParam("param1"), "value1");
+	}
+
 	
 	@Test
 	public void testGetVersion() throws IOException{
