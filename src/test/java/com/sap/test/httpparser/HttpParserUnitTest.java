@@ -269,7 +269,7 @@ public class HttpParserUnitTest {
 	
 	@Test
 	public void testBadRequestParameter() throws IOException{
-		httpRequestAsString = "GET /?param1=value1&=&param2=value2 HTTP/1.1\r\n" +
+		httpRequestAsString = "GET /?param1=value1&p&param2=value2 HTTP/1.1\r\n" +
 				"Host: localhost:50000\r\n";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
 		httpRequest.parseRequest();
