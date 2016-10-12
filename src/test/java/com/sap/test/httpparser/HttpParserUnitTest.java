@@ -2,13 +2,14 @@ package com.sap.test.httpparser;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.hamcrest.core.StringContains.containsString;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.Test;
 
@@ -21,6 +22,15 @@ public class HttpParserUnitTest {
 	public void testEmptyStatusLine() throws IOException{
 		httpRequestAsString = "";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		assertThat(httpRequest.parseRequest(), is(0));
+	}
+	
+	@Test
+	public void testNullStatusLine() throws IOException{
+		httpRequestAsString = "";
+		InputStream is = new ByteArrayInputStream(httpRequestAsString.getBytes());
+		while(is.read() != -1);
+		httpRequest = new HttpParser(is);
 		assertThat(httpRequest.parseRequest(), is(0));
 	}
 	
