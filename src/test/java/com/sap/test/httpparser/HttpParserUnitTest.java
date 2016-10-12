@@ -63,7 +63,8 @@ public class HttpParserUnitTest {
 	
 	@Test
 	public void testBadFormattedHTTPProtocol() throws IOException{
-		httpRequestAsString = "GET / PHTTP/.1\r\n";
+		httpRequestAsString = "GET / PHTTP/1.1\r\n" +
+				"Host: localhost:50000\r\n";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
 		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
 	}
