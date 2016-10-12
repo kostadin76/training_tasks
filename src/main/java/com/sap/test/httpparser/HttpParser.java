@@ -249,6 +249,6 @@ public class HttpParser {
 	}
 
 	private boolean is_GET_Or_HEAD_Request() {
-		return cmd[0].equals("GET") || cmd[0].equals("HEAD");
+		return "GET".equals(cmd[0]) || "HEAD".equals(cmd[0]);
 	}
 }
