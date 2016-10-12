@@ -62,6 +62,13 @@ public class HttpParserUnitTest {
 	}
 	
 	@Test
+	public void testBadFormattedHTTPProtocol() throws IOException{
+		httpRequestAsString = "GET / PHTTP/.1\r\n";
+		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
+		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
+	}
+	
+	@Test
 	public void testHTTPProtocolNumberGreaterThan1_1() throws IOException{
 		httpRequestAsString = "OPTION / HTTP/1.2\r\n";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
@@ -71,13 +78,6 @@ public class HttpParserUnitTest {
 	@Test
 	public void testHTTPProtocolNumberGreaterThan0_1() throws IOException{
 		httpRequestAsString = "OPTION / HTTP/0.1\r\n";
-		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
-		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
-	}
-	
-	@Test
-	public void testBadFormattedHTTPProtocol() throws IOException{
-		httpRequestAsString = "GET / HTTP/.1\r\n";
 		httpRequest = new HttpParser(new ByteArrayInputStream(httpRequestAsString.getBytes()));
 		assertThat(httpRequest.parseRequest(), is(Status.BAD_REQUEST));
 	}
